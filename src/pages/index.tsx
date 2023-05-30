@@ -1,13 +1,22 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '@styles/Home.module.css'
-import { Button } from '@mui/material'
+import Advantages from "@partials/index/_advantages"
+import Faq from "@partials/index/_faq"
+import Presentation from "@partials/index/_presentation"
+import { GetStaticProps } from "next"
 
-export default function Home() {
+export const getStaticProps: GetStaticProps = async () => {
+    return {
+        props: {
+            title: 'Meu Título'
+        }
+    }
+}
+
+export default function Index() {
     return (
-        <div className={styles.container}>
-            <h1>Olá mundo</h1>
-            <Button variant={'contained'}>Clique aqui</Button>
+        <div>
+            <Presentation></Presentation>
+            <Advantages></Advantages>
+            <Faq></Faq>
         </div>
     )
 }

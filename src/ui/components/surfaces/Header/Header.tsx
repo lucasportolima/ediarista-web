@@ -1,5 +1,13 @@
-import { Container, Toolbar, IconButton } from "@mui/material"
-import { HeaderAppBar, HeaderLogo, ButtonsContainer } from './Header.style'
+import { useState } from "react"
+import { 
+    Container,
+    Toolbar,
+    IconButton,
+    MenuList,
+    MenuItem,
+    Divider
+} from "@mui/material"
+import { HeaderAppBar, HeaderLogo, ButtonsContainer, HeaderDrawer } from './Header.style'
 import RoundedButton from 'ui/components/inputs/RoundedButton/RoundedButton'
 import Link from "ui/components/navigation/Link/Link"
 import useIsMobile from "data/hooks/useIsMobile"
@@ -45,10 +53,15 @@ const HeaderDesktop = () => {
 }
 
 const HeaderMobile = () => {
+    const [isDrawOpen, setDrawOpen] = useState(false);
     return (
         <HeaderAppBar>
             <Toolbar component={Container}>
-                <IconButton edge={'start'} color="{'inherit'}">
+                <IconButton
+                    edge={'start'}
+                    color={'inherit'}
+                    onClick={() => setDrawOpen(true)}
+                >
                     <i className={'twf-bars'} />
                 </IconButton>
 
@@ -58,6 +71,24 @@ const HeaderMobile = () => {
                         alt={'e-diaristas'}
                     />
                 </Link>
+
+                <HeaderDrawer
+                    open={isDrawOpen}
+                    onClose={() => setDrawOpen(false)}
+                    onClick={() => setDrawOpen(false)}
+                >
+                    <MenuList>
+                        <Link href={'/login'} Component={MenuItem}>
+                            Login
+                        </Link>
+
+                        <Divider />
+
+                        <Link href={'/cadastro/diarista'} Component={MenuItem}>
+                            Seja um(a) diarista
+                        </Link>
+                    </MenuList>
+                </HeaderDrawer>
             </Toolbar>
         </HeaderAppBar>
     )
